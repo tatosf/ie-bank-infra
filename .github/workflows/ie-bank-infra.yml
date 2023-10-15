@@ -40,7 +40,7 @@ jobs:
         deploymentName: ${{ env.USER_ALIAS }}
 
   deploy-uat:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/santiago-fischel'
     runs-on: ubuntu-latest
     needs: build
     environment:
