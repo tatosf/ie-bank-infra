@@ -47,8 +47,8 @@ jobs:
       name: 'User Acceptance Testing'
     env: 
       ENV: UAT
-      DBHOST: santiagof-dbsrv-uat.postgres.database.azure.com
-      DBNAME: santiagof-db-uat
+      DBHOST: santiagof2-dbsrv-uat.postgres.database.azure.com
+      DBNAME: santiagof2-db-uat
       FLASK_APP: app.py
       FLASK_DEBUG: 1
       

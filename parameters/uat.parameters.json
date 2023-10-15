@@ -6,19 +6,19 @@
             "value": "prod"
         },
         "postgreSQLServerName": {
-            "value": "santiagof-dbsrv-uat"
+            "value": "santiagof2-dbsrv-uat"
         },
         "postgreSQLDatabaseName": {
-            "value": "santiagof-db-uat"
+            "value": "santiagof2-db-uat"
         },
         "appServicePlanName": {
-            "value": "santiagof-asp-uat"
+            "value": "santiagof2-asp-uat"
         },
         "appServiceAPIAppName": {
-            "value": "santiagof-be-uat"
+            "value": "santiagof2-be-uat"
         },
         "appServiceAppName": {
-            "value": "santiagof-fe-uat"
+            "value": "santiagof2-fe-uat"
         },
         "location": {
             "value": "francecentral"

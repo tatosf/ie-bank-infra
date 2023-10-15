@@ -6,19 +6,19 @@
             "value": "nonprod"
         },
         "postgreSQLServerName": {
-            "value": "santiagof-dbsrv-dev"
+            "value": "santiagof2-dbsrv-dev"
         },
         "postgreSQLDatabaseName": {
-            "value": "santiagof-db-dev"
+            "value": "santiagof2-db-dev"
         },
         "appServicePlanName": {
-            "value": "santiagof-asp-dev"
+            "value": "santiagof2-asp-dev"
         },
         "appServiceAPIAppName": {
-            "value": "santiagof-be-dev"
+            "value": "santiagof2-be-dev"
         },
         "appServiceAppName": {
-            "value": "santiagof-fe-dev"
+            "value": "santiagof2-fe-dev"
         },
         "location": {
             "value": "francecentral"
