@@ -3,22 +3,22 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "environmentType": {
-            "value": "nonprod"
+            "value": "prod"
         },
         "postgreSQLServerName": {
-            "value": "santiagof-dbsrv-dev"
+            "value": "santiagof-dbsrv-uat"
         },
         "postgreSQLDatabaseName": {
-            "value": "santiagof-db-dev"
+            "value": "santiagof-db-uat"
         },
         "appServicePlanName": {
-            "value": "santiagof-asp-dev"
+            "value": "santiagof-asp-uat"
         },
         "appServiceAPIAppName": {
-            "value": "santiagof-be-dev"
+            "value": "santiagof-be-uat"
         },
         "appServiceAppName": {
-            "value": "santiagof-fe-dev"
+            "value": "santiagof-fe-uat"
         },
         "location": {
             "value": "brazilsouth"
