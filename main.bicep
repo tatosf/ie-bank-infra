@@ -24,6 +24,10 @@ param appServiceAppName string = 'ie-bank-dev'
 @minLength(3)
 @maxLength(24)
 param appServiceAPIAppName string = 'ie-bank-api-dev'
+@sys.description('The name of the Azure Monitor workspace')
+param azureMonitorName string
+@sys.description('The name of the Application Insights')
+param appInsightsName string
 @sys.description('The Azure location where the resources will be deployed')
 param location string = resourceGroup().location
 @sys.description('The value for the environment variable ENV')
@@ -42,6 +46,7 @@ param appServiceAPIDBHostFLASK_APP string
 @sys.description('The value for the environment variable FLASK_DEBUG')
 param appServiceAPIDBHostFLASK_DEBUG string
 
+//server
 resource postgresSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: postgreSQLServerName
   location: location
@@ -49,6 +54,7 @@ resource postgresSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01
     name: 'Standard_B1ms'
     tier: 'Burstable'
   }
+  //apply the credentials. backend code needs credentials for the db
   properties: {
     administratorLogin: 'iebankdbadmin'
     administratorLoginPassword: 'IE.Bank.DB.Admin.Pa$$'
@@ -67,6 +73,7 @@ resource postgresSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01
     version: '15'
   }
 
+    //not very secure letting all IPs access the db. 
   resource postgresSQLServerFirewallRules 'firewallRules@2022-12-01' = {
     name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
     properties: {
@@ -76,15 +83,18 @@ resource postgresSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01
   }
 }
 
+//this is the database
 resource postgresSQLDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2022-12-01' = {
   name: postgreSQLDatabaseName
-  parent: postgresSQLServer
+  parent: postgresSQLServer 
   properties: {
     charset: 'UTF8'
     collation: 'en_US.UTF8'
   }
 }
-
+//we have a mdoule for the app service. Is the tool to follow modular code
+//we have another infraestracture as a code in another file and we call it here (app-service.bicep)
+//the app service plan is the server where the app will be deployed
 module appService 'modules/app-service.bicep' = {
   name: 'appService'
   params: {
@@ -107,3 +117,18 @@ module appService 'modules/app-service.bicep' = {
 }
 
 output appServiceAppHostName string = appService.outputs.appServiceAppHostName
+
+resource azureMonitor 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+  name: azureMonitorName
+  location: location
+}
+
+resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: appInsightsName
+  location: location
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    WorkspaceResourceId: resourceId('Microsoft.OperationalInsights/workspaces', azureMonitorName)
+  }
+}

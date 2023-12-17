@@ -6,22 +6,28 @@
             "value": "prod"
         },
         "postgreSQLServerName": {
-            "value": "santiagof2-dbsrv-uat"
+            "value": "sfischel-dbsrv-uat"
         },
         "postgreSQLDatabaseName": {
-            "value": "santiagof2-db-uat"
+            "value": "sfischel-db-uat"
         },
         "appServicePlanName": {
-            "value": "santiagof2-asp-uat"
+            "value": "sfischel-asp-uat"
         },
         "appServiceAPIAppName": {
-            "value": "santiagof2-be-uat"
+            "value": "sfischel-be-uat"
         },
         "appServiceAppName": {
-            "value": "santiagof2-fe-uat"
+            "value": "sfischel-fe-uat"
+        },
+        "azureMonitorName": {
+            "value": "sfischel-am-uat"
+        },
+        "appInsightsName": {
+            "value": "sfischel-ai-uat"
         },
         "location": {
-            "value": "francecentral"
+            "value": "France Central"
         }
     }
 }

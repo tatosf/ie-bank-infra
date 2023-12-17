@@ -13,16 +13,18 @@ param appServiceAPIDBHostFLASK_DEBUG string
 @allowed([
   'nonprod'
   'prod'
+  'uat'
 ])
 param environmentType string
 
 var appServicePlanSkuName = (environmentType == 'prod') ? 'B1' : 'F1'
 
+//this is the resource provider for the app service plan
 resource appServicePlan 'Microsoft.Web/serverFarms@2022-03-01' = {
   name: appServicePlanName
   location: location
   sku: {
-    name: appServicePlanSkuName
+    name: appServicePlanSkuName //basic or free in this case
   }
   kind: 'linux'
   properties: {
@@ -30,9 +32,10 @@ resource appServicePlan 'Microsoft.Web/serverFarms@2022-03-01' = {
   }
 }
 
+//Api is the backend
 resource appServiceAPIApp 'Microsoft.Web/sites@2022-03-01' = {
   name: appServiceAPIAppName
-  location: location
+  location: location 
   properties: {
     serverFarmId: appServicePlan.id
     httpsOnly: true
@@ -40,6 +43,7 @@ resource appServiceAPIApp 'Microsoft.Web/sites@2022-03-01' = {
       linuxFxVersion: 'PYTHON|3.11'
       alwaysOn: false
       ftpsState: 'FtpsOnly'
+      //backend needs variables to connect to the database
       appSettings: [
         {
           name: 'ENV'
@@ -72,6 +76,10 @@ resource appServiceAPIApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
           value: 'true'
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: '90354c3a-83cf-4143-9963-2e9268b76aad' 
         }
       ]
     }
